@@ -20,15 +20,14 @@ export const setupServer = () => {
     }),
   );
 
-  app.use((req, res, next) => {
-    req.id = randomUUID();
-    next();
-  });
+  // app.use((req, res, next) => {
+  //   req.id = randomUUID();
+  //   next();
+  // });
 
   app.get('/', async (req, res, next) => {
     res.json({
       message: 'HomePage',
-      id: req.id,
     });
     // next();
   });
