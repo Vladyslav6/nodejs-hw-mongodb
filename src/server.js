@@ -68,6 +68,7 @@ export const setupServer = () => {
   //
   //
   //
+  //
   app.use((error, req, res, next) => {
     res.status(404).json({
       status: 404,
