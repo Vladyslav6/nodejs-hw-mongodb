@@ -1,11 +1,11 @@
 import express from 'express';
-import { randomUUID } from 'node:crypto';
+// import { randomUUID } from 'node:crypto';
 import cors from 'cors';
 import pino from 'pino-http';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { ENV_VARS } from './constants/envVars.js';
 import 'dotenv/config';
-import { Student } from './db/models/students.js';
+import { Contact } from './db/services/contacts.js';
 //
 //
 //
@@ -35,11 +35,11 @@ export const setupServer = () => {
   //
   //
   app.get('/contacts', async (req, res, next) => {
-    const data = await Student.find();
+    const data = await Contact.find();
     res.status(200).json({
       status: 200,
       message: 'Successfully found contacts!',
-      id: req.id,
+
       data,
     });
   });
@@ -50,7 +50,7 @@ export const setupServer = () => {
   //
   app.get('/contacts/:contactId', async (req, res, next) => {
     const { contactId } = req.params;
-    const contact = await Student.findById(contactId);
+    const contact = await Contact.findById(contactId);
     //
     // if (!contact) {
     //   return res.status(404).json({
@@ -61,7 +61,7 @@ export const setupServer = () => {
     res.status(200).json({
       status: 200,
       message: `Successfully found contact with id ${contactId}!`,
-      id: req.id,
+
       data: contact,
     });
   });
@@ -70,6 +70,7 @@ export const setupServer = () => {
 
   app.use((error, req, res, next) => {
     res.status(404).json({
+      status: 404,
       message: 'Contact not found',
     });
     next();
