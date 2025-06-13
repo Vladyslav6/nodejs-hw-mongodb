@@ -5,7 +5,7 @@ import pino from 'pino-http';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { ENV_VARS } from './constants/envVars.js';
 import 'dotenv/config';
-import { Contact } from './services/contacts.js';
+import { Contact } from './db/models/contacts.js';
 //
 //
 //
@@ -54,7 +54,6 @@ export const setupServer = () => {
     
     if (!contact) {
       return res.status(404).json({
-        
         message: `Contact not found`,
       });
     }

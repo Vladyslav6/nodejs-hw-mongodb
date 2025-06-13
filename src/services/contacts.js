@@ -1,33 +1,13 @@
-import { model, Schema } from 'mongoose';
+// src/services/students.js 
+import { Contact } from '../db/models/contacts.js';
 
-const contactSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-    },
-    isFavourite: {
-      type: Boolean,
-      default: false,
-    },
-    contactType: {
-      type: String,
-      enum: ['work', 'home', 'personal'],
-      required: true,
-      default: 'personal',
-    },
-  },
-  {
-    timestamps: true,
-    versionKey: false,
-  },
-);
 
-export const Contact = model('contact', contactSchema);
+export const getAllStudents = async () => {
+  const students = await Contact.find();
+  return students;
+};
+
+export const getStudentById = async (studentId) => {
+  const student = await Contact.findById(studentId);
+  return student;
+};
