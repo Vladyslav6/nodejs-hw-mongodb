@@ -5,8 +5,8 @@ import pino from 'pino-http';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { ENV_VARS } from './constants/envVars.js';
 import 'dotenv/config';
-import { ContactCollection } from './db/models/contacts.js';
-import { getAllStudents, getStudentById } from './services/contacts.js';
+
+import { getAllContacts,  getContactsById } from './services/contacts.js';
 //
 //
 //
@@ -36,7 +36,7 @@ export const setupServer = () => {
   //
   //
   app.get('/contacts', async (req, res, next) => {
-    const data = await getAllStudents();
+    const data = await getAllContacts();
    
     res.status(200).json({
       status: 200,
@@ -52,7 +52,7 @@ export const setupServer = () => {
   //
   app.get('/contacts/:contactId', async (req, res, next) => {
     const { contactId } = req.params;
-    const contact = await getStudentById(contactId);
+    const contact = await getContactsById(contactId);
     
     if (!contact) {
       return res.status(404).json({
