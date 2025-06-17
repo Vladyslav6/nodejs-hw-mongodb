@@ -1,12 +1,13 @@
 import express from 'express';
-// import { randomUUID } from 'node:crypto';
 import cors from 'cors';
 import pino from 'pino-http';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { ENV_VARS } from './constants/envVars.js';
 import 'dotenv/config';
 
-import { getAllContacts,  getContactsById } from './services/contacts.js';
+import router from './routers/index.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 //
 //
 //
@@ -21,68 +22,16 @@ export const setupServer = () => {
     }),
   );
 
-  // app.use((req, res, next) => {
-  //   req.id = randomUUID();
-  //   next();
-  // });
-
+  app.use(router);
   app.get('/', async (req, res, next) => {
     res.json({
       message: 'HomePage',
     });
-    // next();
   });
 
-  //
-  //
-  app.get('/contacts', async (req, res, next) => {
-    const data = await getAllContacts();
-   
-    res.status(200).json({
-      status: 200,
-      message: 'Successfully found contacts!',
+  app.use(errorHandler);
 
-      data,
-    });
-  });
-  //
-  //
-
-  //
-  //
-  app.get('/contacts/:contactId', async (req, res, next) => {
-    const { contactId } = req.params;
-    const contact = await getContactsById(contactId);
-    
-    if (!contact) {
-      return res.status(404).json({
-        message: `Contact not found`,
-      });
-    }
-    res.status(200).json({
-      status: 200,
-      message: `Successfully found contact with id ${contactId}!`,
-
-      data: contact,
-    });
-  });
-  //
-  //
-  //
-  //
-  app.use((error, req, res, next) => {
-    res.status(404).json({
-    
-      message: 'Contact not found',
-    });
-    next();
-  });
-
-  app.use((req, res, next) => {
-    res.status(404).json({
-      message: 'Not found',
-    });
-  });
+  app.use(notFoundHandler);
 
   const PORT = getEnvVar(ENV_VARS.PORT, 3000);
   app.listen(PORT, () => {
