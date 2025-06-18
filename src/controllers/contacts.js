@@ -43,21 +43,11 @@ export const deleteContactController = async (req, res, next) => {
 
 export const createContactController = async (req, res) => {
   console.log(req.body);
+  const contact = await createContact(req.body);
 
-  return res.json({
+  res.status(201).json({
     status: 201,
     message: `Successfully created a contact!`,
-    data: {},
+    data: contact,
   });
 };
-
-// export const createContactController = async (req, res) => {
-//   console.log(req.body);
-//   const contact = await createContact(req.body);
-
-//   res.status(201).json({
-//     status: 201,
-//     message: `Successfully created a contact!`,
-//     data: contact,
-//   });
-// };

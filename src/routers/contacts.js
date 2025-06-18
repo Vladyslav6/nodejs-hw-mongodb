@@ -16,10 +16,11 @@ contactRouter.get(
   '/contacts/:contactId',
   ctrlWrapper(getContactByIdController),
 );
+contactRouter.post('/contacts', ctrlWrapper(createContactController));
+
 contactRouter.delete(
   '/contacts/:contactId',
   ctrlWrapper(deleteContactController),
 );
 
-contactRouter.post('/students', createContactController);
 export default contactRouter;

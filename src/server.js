@@ -13,6 +13,11 @@ import { errorHandler } from './middlewares/errorHandler.js';
 //
 export const setupServer = () => {
   const app = express();
+  app.use(
+    express.json({
+      type: ['application/json', 'application/vnd.api+json'],
+    }),
+  );
   app.use(cors());
   app.use(
     pino({
@@ -21,11 +26,7 @@ export const setupServer = () => {
       },
     }),
   );
-  app.use(
-    express.json({
-      type: ['application/json', 'application/vnd.api+json'],
-    }),
-  );
+
   app.use(router);
 
   app.get('/', async (req, res, next) => {
