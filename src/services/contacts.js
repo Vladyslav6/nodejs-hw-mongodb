@@ -29,18 +29,17 @@ export const createContact = async (payload) => {
 };
 
 export const updateContacts = async (contactId, payload) => {
-  const rawResult = await ContactCollection.findByIdAndUpdate(
+  const contact = await ContactCollection.findByIdAndUpdate(
     contactId,
     payload,
     {
       new: true,
-      
     },
   );
 
-  if (!rawResult){
-    throw createHttpError(404, "Contact not found");
+  if (!contact) {
+    throw createHttpError(404, 'Contact not found2');
   }
 
-  return;
+  return contact;
 };
