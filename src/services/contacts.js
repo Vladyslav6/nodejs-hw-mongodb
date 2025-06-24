@@ -1,8 +1,9 @@
 import createHttpError from 'http-errors';
 import { ContactCollection } from '../db/models/contacts.js';
 
-export const getAllContacts = async () => {
-  const contact = await ContactCollection.find();
+export const getAllContacts = async ({ page, perPage }) => {
+  const pageSkip = (page - 1) * perPage;
+  const contact = await ContactCollection.find().skip(pageSkip).limit(perPage);
 
   return contact;
 };

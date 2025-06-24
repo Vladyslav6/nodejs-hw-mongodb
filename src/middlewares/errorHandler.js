@@ -10,6 +10,15 @@ export const errorHandler = (err, req, res, next) => {
     return;
   }
 
+  if (err.isJoi) {
+    return res.status(400).json({
+      status: 400,
+      errorMessage: 'Validation error',
+      id: req.id,
+      details: err.message,
+    });
+  }
+
   res.status(500).json({
     status: 500,
     message: 'Something went wrong',
