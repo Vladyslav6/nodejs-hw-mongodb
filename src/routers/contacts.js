@@ -29,7 +29,6 @@ contactRouter.post(
 );
 contactRouter.delete(
   '/contacts/:contactId',
-  validateBody(validateSchema),
   ctrlWrapper(deleteContactController),
 );
 
