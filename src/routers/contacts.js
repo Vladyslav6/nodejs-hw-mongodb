@@ -15,7 +15,11 @@ import { updateValidateSchema } from '../validation/updateValidateSchema.js';
 
 const contactRouter = Router();
 
+
+
 contactRouter.use('/contacts/:contactId', isValidId('contactId'));
+
+
 
 contactRouter.get('/contacts', ctrlWrapper(getContactController));
 contactRouter.get(
