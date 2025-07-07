@@ -8,6 +8,7 @@ import 'dotenv/config';
 import router from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import cookieParser from 'cookie-parser';
 //
 //
 //
@@ -26,6 +27,7 @@ export const setupServer = () => {
       },
     }),
   );
+  app.use(cookieParser());
 
   app.use(router);
 
