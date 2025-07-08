@@ -8,20 +8,20 @@ import {
 } from '../services/contacts.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
+// import { ContactCollection } from '../db/models/contacts.js';
 
 export const getContactController = async (req, res, next) => {
-
   const { page, perPage } = parsePaginationParams(req.query);
+  const { sortBy, sortOrder } = parseSortParams(req.query);
 
-const { sortBy, sortOrder } = parseSortParams(req.query);
-
+  const filters = req.user._id;
   const data = await getAllContacts({
     page,
     perPage,
     sortBy,
     sortOrder,
-    // page: parseInt(page),
-    // perPage: +perPage,
+
+    filters,
   });
 
   res.status(200).json({
@@ -57,7 +57,10 @@ export const deleteContactController = async (req, res, next) => {
 };
 
 export const createContactController = async (req, res) => {
-  const contact = await createContact(req.body);
+  const contact = await createContact({
+    ...req.body,
+    userId: req.body.userId ?? req.user._id,
+  });
 
   res.status(201).json({
     status: 201,
@@ -65,27 +68,6 @@ export const createContactController = async (req, res) => {
     data: contact,
   });
 };
-
-// export const upsertContactController = async (req, res, next) => {
-//   const { contactId } = req.params;
-
-//   const result = await updateContacts(contactId, req.body, {
-//     upsert: true,
-//   });
-
-//   if (!result) {
-//     next(createHttpError(404, 'Contact not found'));
-//     return;
-//   }
-
-//   const status = result.isNew ? 201 : 200;
-
-//   res.status(status).json({
-//     status,
-//     message: `Successfully upserted a contact!`,
-//     data: result.contact,
-//   });
-// };
 
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;

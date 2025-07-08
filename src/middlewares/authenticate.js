@@ -1,0 +1,32 @@
+import createHttpError from 'http-errors';
+import { SessionCollection } from '../db/models/session.js';
+import { UsersCollection } from '../db/models/user.js';
+
+export const authenticate = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    throw createHttpError(401, 'Authorization token is missing!');
+  }
+
+  const [bearer, token] = authHeader.split(' ');
+  if (!(bearer === 'Bearer' && typeof token === 'string')) {
+    throw createHttpError(401, 'Authorization token must be of type Bearer');
+  }
+
+  const session = await SessionCollection.findOne({ accessToken: token });
+  if (!session) {
+    throw createHttpError(401, 'Session not found');
+  }
+
+  if (session.accessTokenValidUntil < new Date()) {
+    throw createHttpError(401, 'Access token expired!');
+  }
+  const user = await UsersCollection.findById(session.userId);
+
+  if (!user) {
+    throw createHttpError(401, 'User not found');
+  }
+  req.user = user;
+  //
+  next();
+};

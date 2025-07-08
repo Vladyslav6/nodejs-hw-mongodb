@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { typeContacts } from '../../constants/typeContact.js';
+import { UsersCollection } from './user.js';
 
 const contactSchema = new Schema(
   {
@@ -23,6 +24,11 @@ const contactSchema = new Schema(
       enum: Object.values(typeContacts),
       required: true,
       default: 'personal',
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: UsersCollection,
     },
   },
   {

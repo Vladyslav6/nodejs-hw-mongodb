@@ -3,24 +3,34 @@ import { ContactCollection } from '../db/models/contacts.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { SORT_ORDER } from '../constants/sort.js';
 
-export const getAllContacts = async ({ page, perPage, sortOrder = SORT_ORDER.ASC,
-  sortBy = '_id', }) => {
-   const limit = perPage;
+export const getAllContacts = async ({
+  page,
+  perPage,
+  sortOrder = SORT_ORDER.ASC,
+  sortBy = '_id',
+  filters,
+}) => {
+  const limit = perPage;
   const skip = (page - 1) * perPage;
-  // const pageSkip = (page - 1) * perPage;
+
   const contactQuery = ContactCollection.find();
-const contactCount = await ContactCollection.find()
+
+  if (filters) {
+    contactQuery.where('userId').equals(filters);
+  }
+  const contactCount = await ContactCollection.find()
     .merge(contactQuery)
     .countDocuments();
 
-const contact = await contactQuery.skip(skip).limit(limit).sort({ [sortBy]: sortOrder }).exec();
-
-  // const contact = await ContactCollection.find().skip(skip).limit(limit).exec();
+  const contact = await contactQuery
+    .skip(skip)
+    .limit(limit)
+    .sort({ [sortBy]: sortOrder })
+    .exec();
 
   const paginationData = calculatePaginationData(contactCount, perPage, page);
 
-
-   return {
+  return {
     data: contact,
     ...paginationData,
   };
@@ -57,7 +67,7 @@ export const updateContacts = async (contactId, payload) => {
   );
 
   if (!contact) {
-    throw createHttpError(404, 'Contact not found2');
+    throw createHttpError(404, 'Contact not found');
   }
 
   return contact;
