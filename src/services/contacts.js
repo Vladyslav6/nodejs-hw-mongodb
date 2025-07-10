@@ -36,17 +36,22 @@ export const getAllContacts = async ({
   };
 };
 
-export const getContactsById = async (contactId) => {
-  const contact = await ContactCollection.findById(contactId);
+export const getContactsById = async (contactId, filters) => {
+  const contact = await ContactCollection.findOne({
+    _id: contactId,
+    userId: filters,
+  });
+  // const contact = await ContactCollection.findById(contactId);
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
   }
   return contact;
 };
 
-export const deleteContact = async (contactId) => {
+export const deleteContact = async (contactId, filters) => {
   const contact = await ContactCollection.findOneAndDelete({
     _id: contactId,
+    userId: filters,
   });
 
   return contact;
@@ -57,13 +62,11 @@ export const createContact = async (payload) => {
   return contact;
 };
 
-export const updateContacts = async (contactId, payload) => {
-  const contact = await ContactCollection.findByIdAndUpdate(
-    contactId,
+export const updateContacts = async (contactId, payload, filters) => {
+  const contact = await ContactCollection.findOneAndUpdate(
+    { _id: contactId, userId: filters },
     payload,
-    {
-      new: true,
-    },
+    { new: true },
   );
 
   if (!contact) {
