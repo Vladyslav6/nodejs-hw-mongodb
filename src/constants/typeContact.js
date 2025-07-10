@@ -1,5 +1,5 @@
 export const typeContacts = {
-  WORK: 'wokr',
+  WORK: 'work',
   HOME: 'home',
   PERSONAL: 'personal',
 };
