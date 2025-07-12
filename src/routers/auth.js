@@ -10,6 +10,10 @@ import { registerValidationUserSchema } from '../validation/registerValidateSche
 import { validateBody } from '../middlewares/validateBody.js';
 import { loginValidationUserSchema } from '../validation/loginValidateSchema.js';
 
+import { requestResetEmailSchema } from '../validation/auth.js';
+import { requestResetEmailController } from '../controllers/auth.js';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+
 const authRouter = Router();
 //
 
@@ -27,4 +31,11 @@ authRouter.use('/auth/logout', logoutUserControllers);
 authRouter.use('/auth/refresh-session', refreshSessionController);
 
 //
+
+authRouter.post(
+  '/auth/request-reset-email',
+  validateBody(requestResetEmailSchema),
+  ctrlWrapper(requestResetEmailController),
+);
+
 export default authRouter;
