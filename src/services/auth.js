@@ -87,6 +87,7 @@ import jwt from 'jsonwebtoken';
 import { SMTP } from '../constants/index.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { sendEmail } from '../utils/sendMail.js';
+import { ENV_VARS } from '../constants/envVars.js';
 
 export const requestResetToken = async (email) => {
   const user = await UsersCollection.findOne({ email });
@@ -98,7 +99,7 @@ export const requestResetToken = async (email) => {
       sub: user._id,
       email,
     },
-    getEnvVar('JWT_SECRET'),
+    getEnvVar(ENV_VARS.JWT_SECRET),
     {
       expiresIn: '15m',
     },
