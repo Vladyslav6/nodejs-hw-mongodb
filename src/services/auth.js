@@ -99,7 +99,7 @@ export const requestResetToken = async (email) => {
       sub: user._id,
       email,
     },
-    getEnvVar(ENV_VARS.JWT_SECRET),
+    getEnvVar('JWT_SECRET'),
     {
       expiresIn: '15m',
     },
@@ -109,6 +109,6 @@ export const requestResetToken = async (email) => {
     from: getEnvVar(SMTP.SMTP_FROM),
     to: email,
     subject: 'Reset your password',
-    html: `<p>Click <a href="${resetToken}">here</a> to reset your password!</p>`,
+    html: `<p>Click <a href="${resetToken}">here</a><a href="google.com">Google</a> to reset your password!</p>`,
   });
 };
