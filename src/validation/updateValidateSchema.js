@@ -7,4 +7,5 @@ export const updateValidateSchema = Joi.object({
   email: Joi.string().min(3).max(20),
   contactType: Joi.string().valid(...Object.values(typeContacts)),
   isFavourite: Joi.boolean(),
+  // photo: Joi.string(),
 });

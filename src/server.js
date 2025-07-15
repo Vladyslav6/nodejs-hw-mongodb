@@ -9,11 +9,13 @@ import router from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants/index.js';
 //
 //
 //
 export const setupServer = () => {
   const app = express();
+
   app.use(
     express.json({
       type: ['application/json', 'application/vnd.api+json'],
@@ -36,7 +38,9 @@ export const setupServer = () => {
       message: 'HomePage',
     });
   });
-
+  //
+  app.use('/uploads', express.static(UPLOAD_DIR));
+  //
   app.use(errorHandler);
 
   app.use(notFoundHandler);
