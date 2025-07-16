@@ -23,7 +23,7 @@ contactRouter.use('/contacts/:contactId', isValidId('contactId'));
 //
 //
 // contactRouter.get('/contacts', ctrlWrapper(getContactController));
-contactRouter.get('/contacts', upload.single('photo'),ctrlWrapper(getContactController));
+contactRouter.get('/contacts', ctrlWrapper(getContactController));
 
 
 contactRouter.get(
@@ -34,6 +34,7 @@ contactRouter.get(
   //
 contactRouter.post(
   '/contacts',
+  upload.single('photo'),
   validateBody(validateSchema),
   ctrlWrapper(createContactController),
 );
