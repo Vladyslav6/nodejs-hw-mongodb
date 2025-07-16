@@ -6,6 +6,9 @@ export const updateValidateSchema = Joi.object({
   phoneNumber: Joi.string().min(6).max(20),
   email: Joi.string().min(3).max(20),
   contactType: Joi.string().valid(...Object.values(typeContacts)),
-  isFavourite: Joi.boolean(),
-  // photo: Joi.string(),
+  isFavourite: Joi.boolean()
+    .truthy('true')
+    .falsy('false')
+    .default(false),
+
 });

@@ -9,7 +9,10 @@ export const validateSchema = Joi.object({
   contactType: Joi.string()
     .valid(...Object.values(typeContacts))
     .required(),
-  isFavourite: Joi.boolean(),
+  isFavourite: Joi.boolean()
+    .truthy('true') 
+    .falsy('false')   
+    .default(false), 
   userId: Joi.string().custom((value, helper) => {
     if (!isValidObjectId(value)) {
       return helper.message('Not valid mongo objectId');

@@ -16,9 +16,15 @@ const contactSchema = new Schema(
       type: String,
     },
     isFavourite: {
-      type: Boolean,
-      default: false,
-    },
+  type: Boolean,
+  default: false,
+  set: (value) => {
+    if (typeof value === 'string') {
+      return value.toLowerCase() === 'true';
+    }
+    return Boolean(value);
+  },
+},
     contactType: {
       type: String,
       enum: Object.values(typeContacts),
