@@ -20,13 +20,18 @@ const contactRouter = Router();
 contactRouter.use('/contacts', authenticate);
 
 contactRouter.use('/contacts/:contactId', isValidId('contactId'));
+//
+//
+// contactRouter.get('/contacts', ctrlWrapper(getContactController));
+contactRouter.get('/contacts', upload.single('photo'),ctrlWrapper(getContactController));
 
-contactRouter.get('/contacts', upload.single('photo'));
-ctrlWrapper(getContactController),
-  contactRouter.get(
+
+contactRouter.get(
     '/contacts/:contactId',
     ctrlWrapper(getContactByIdController),
   );
+  //
+  //
 contactRouter.post(
   '/contacts',
   validateBody(validateSchema),
