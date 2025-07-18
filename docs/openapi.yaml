@@ -5,8 +5,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description:
-    This is a documentation of contact app
+  description: This is a documentation of contact app
 tags:
   - name: Contacts
     description: Операції з контактами
@@ -16,11 +15,35 @@ tags:
   # теги, що ви будете використовувати
 servers:
   - url: http://localhost:3000
-  - url: #посилання на задеплоєний сайт
+  - url: https://nodejs-hw-mongodb-8-fckh.onrender.com
+
 paths:
-  # тут будуть посилання на ендпоінти
-components:nnp
+  /contacts:
+    get:
+      $ref: ../swagger/paths/contacts/get.yaml
+# тут будуть посилання на ендпоінти
+components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+# openapi: 3.1.0
+# info:
+#   version: 1.0.0
+#   title: Contact app
+#   license:
+#     name: Apache 2.0
+#     url: http://www.apache.org/licenses/LICENSE-2.0.html
+#   description: This is a documentation of contact app
+# tags:
+#   # теги, що ви будете використовувати
+# servers:
+#   - url: http://localhost:3000
+#   - url: https://nodejs-hw-mongodb-8-fckh.onrender.com
+# paths:
+#   # тут будуть посилання на ендпоінти
+# components:
+#   securitySchemes:
+#     bearerAuth:
+#       type: http
+#       scheme: bearer
