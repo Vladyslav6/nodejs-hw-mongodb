@@ -19,7 +19,7 @@ requestBody:
         $ref: ../../../components/schemas/UpdateContactInput.yaml
 responses:
   '200':
-    description: Contact updated successfully
+    description: Successfully patched a contact
     content:
       application/json:
         schema:

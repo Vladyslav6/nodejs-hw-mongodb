@@ -5,7 +5,7 @@ import { UsersCollection } from '../db/models/user.js';
 export const authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    throw createHttpError(401, 'Authorization token is missing!');
+    throw createHttpError(401, 'No token provided');
   }
 
   const [bearer, token] = authHeader.split(' ');
