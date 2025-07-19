@@ -2,7 +2,7 @@ type: object
 properties:
   accessToken:
     type: string
-    example: 'p+7TBVKcRDYqX7eiED85I2ngccDQJ95E2JEY3/EL...'
+    example: 'VdupXT+WljPCrQcogNRRwLu1geWyZ82JXUIE0XQI...'
   refreshToken:
     type: string
-    example: 'p+7TBVKcRDYqX7eiED85I2ngccDQJ95E2JEY3/EL...'
+    example: 'zoLK7qRkXK0kDUabZ90iJDMEHcvgurH%2BYDqjY1mR...'
