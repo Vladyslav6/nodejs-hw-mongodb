@@ -1,0 +1,40 @@
+tags:
+  - Contacts
+summary: Delete a contact
+operationId: deleteContact
+description: Delete a contact by ID.
+security:
+  - bearerAuth: []
+parameters:
+  - name: contactId
+    in: path
+    required: true
+    schema:
+      type: string
+responses:
+  '204':
+    description: Contact deleted successfully
+  '400':
+    description: Invalid contact ID
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '401':
+    description: Unauthorized (missing or invalid token)
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '404':
+    description: Contact not found
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '500':
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml

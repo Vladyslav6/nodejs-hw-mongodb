@@ -1,0 +1,50 @@
+tags:
+  - Contacts
+summary: Update a contact
+operationId: updateContact
+description: Update an existing contact. You can also upload a new photo.
+security:
+  - bearerAuth: []
+parameters:
+  - name: contactId
+    in: path
+    required: true
+    schema:
+      type: string
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        $ref: ../../../components/schemas/UpdateContactInput.yaml
+responses:
+  '200':
+    description: Contact updated successfully
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/ContactResponse.yaml
+  '400':
+    description: Invalid request body or malformed contact ID
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '401':
+    description: Unauthorized (missing or invalid token)
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '404':
+    description: Contact not found
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '500':
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml

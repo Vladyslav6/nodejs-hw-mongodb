@@ -1,0 +1,45 @@
+tags:
+  - Contacts
+summary: Get a contact by ID
+operationId: getContactById
+description: Retrieve detailed information about a specific contact by its unique ID.
+security:
+  - bearerAuth: []
+parameters:
+  - name: contactId
+    in: path
+    required: true
+    description: The ID of the contact to retrieve
+    schema:
+      type: string
+responses:
+  '200':
+    description: Contact retrieved successfully
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/ContactResponse.yaml
+  '400':
+    description: Invalid contact ID
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '401':
+    description: Unauthorized (missing or invalid token)
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '404':
+    description: Contact not found
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml
+  '500':
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/Error.yaml

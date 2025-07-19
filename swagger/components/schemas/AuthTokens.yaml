@@ -1,0 +1,8 @@
+type: object
+properties:
+  accessToken:
+    type: string
+    example: 'p+7TBVKcRDYqX7eiED85I2ngccDQJ95E2JEY3/EL...'
+  refreshToken:
+    type: string
+    example: 'p+7TBVKcRDYqX7eiED85I2ngccDQJ95E2JEY3/EL...'
