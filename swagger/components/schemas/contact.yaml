@@ -2,7 +2,7 @@ type: object
 properties:
   _id:
     type: string
-    example: '6877c3ffde0616542ba1787d'
+    example: '6877c757b2a44d75a2ae711b'
   name:
     type: string
     example: 'John Doe'
@@ -11,7 +11,7 @@ properties:
     example: '+380991234567'
   email:
     type: string
-    example: 'john.doe@example.com'
+    example: 'example@example.com'
   isFavourite:
     type: boolean
     example: true
@@ -21,7 +21,7 @@ properties:
     example: 'personal'
   userId:
     type: string
-    example: '6877aa663506e2d71c2d0b03'
+    example: '6873c4a5dcb02ebe5df507d9'
   photo:
     type: string
     example: ''

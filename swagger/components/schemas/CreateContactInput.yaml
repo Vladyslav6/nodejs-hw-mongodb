@@ -8,7 +8,7 @@ properties:
     example: +380991234567
   email:
     type: string
-    example: john@example.com
+    example: example@example.com
   isFavourite:
     type: boolean
     example: true

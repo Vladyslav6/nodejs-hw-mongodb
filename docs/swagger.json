@@ -444,7 +444,7 @@
         "properties": {
           "_id": {
             "type": "string",
-            "example": "64b123456789abcdef012345"
+            "example": "6877c3ffde0616542ba1787d"
           },
           "name": {
             "type": "string",
@@ -473,7 +473,7 @@
           },
           "userId": {
             "type": "string",
-            "example": "64b0987654321abcdef01234"
+            "example": "6877aa663506e2d71c2d0b03"
           },
           "photo": {
             "type": "string",
@@ -574,7 +574,7 @@
           },
           "email": {
             "type": "string",
-            "example": "john@example.com"
+            "example": "example@example.com"
           },
           "isFavourite": {
             "type": "boolean",
